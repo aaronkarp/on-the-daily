@@ -273,6 +273,7 @@ button:active {
 .completed-task-list-container {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .task-list-item {

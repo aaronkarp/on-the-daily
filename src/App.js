@@ -139,22 +139,6 @@ function AddUserForm({ showAddUserForm, onAddUser, onToggleAddUserForm }) {
   );
 }
 
-function Header({ currentUser }) {
-  return (
-    <header>
-      <h1>{currentUser ? `${currentUser.name}'s Tasks` : 'On the Daily'}</h1>
-    </header>
-  );
-}
-
-function StartScreen({ users }) {
-  return (
-    <div className="start-screen">
-      <h2>{users.length > 0 ? 'Select a user to get started' : 'Add a user to get started'}</h2>
-    </div>
-  );
-}
-
 function TaskList({ users, currentUser, onToggleTask, onDeleteTask }) {
   const tasks = users.find((user) => user.id === currentUser.id).tasks?.filter((task) => !task.done);
   return (

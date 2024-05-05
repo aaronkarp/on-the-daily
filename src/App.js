@@ -12,8 +12,9 @@ export default function App() {
 
   function handleAddUser(e, name, image) {
     e.preventDefault();
+    const newId = crypto.randomUUID();
     const newUser = {
-      id: crypto.randomUUID(),
+      id: newId,
       name,
       image,
       tasks: []
@@ -26,7 +27,7 @@ export default function App() {
   function handleDeleteUser(e, id) {
     e.preventDefault();
     setUsers((users) => users.filter((user) => user.id !== id));
-    if (currentUser.id === id) setCurrentUser(null);
+    if (currentUser?.id === id) setCurrentUser(null);
   }
 
   function handleToggleAddUserForm() {

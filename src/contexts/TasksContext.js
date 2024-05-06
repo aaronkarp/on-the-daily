@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
 
-const ListsContext = createContext();
+const TasksContext = createContext();
 
 const initialState = {
   users: [],
@@ -13,25 +13,25 @@ function reducer(state, action) {
     case 'form/toggle':
       return {
         ...state,
-        showAddUserForm: !state.showAddUserForm
+        showAddUserForm: action.payload
       };
     case 'user/add':
       return {
         ...state,
         users: [...state.users, action.payload],
         showAddUserForm: false,
-        currentUser: action.payload
+        currentUser: action.payload.id
       };
     case 'user/delete':
       return {
         ...state,
         users: state.users.filter((user) => user.id !== action.payload),
-        currentUser: {}
+        currentUser: ''
       };
     case 'user/select':
       return {
         ...state,
-        currentUser: action.payload
+        currentUser: { ...action.payload }
       };
     case 'task/add':
       return {
@@ -41,9 +41,21 @@ function reducer(state, action) {
         )
       };
     case 'task/toggle':
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === state.currentUser.id ? { ...user, tasks: [...action.payload] } : { ...user }
+        )
+      };
     case 'task/delete':
-      return {};
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === state.currentUser.id
+            ? { ...user, tasks: user.tasks.filter((task) => task.id !== action.payload) }
+            : { ...user }
+        )
+      };
     default:
       throw new Error('Unknown action');
   }
@@ -52,8 +64,8 @@ function reducer(state, action) {
 function TasksProvider({ children }) {
   const [{ users, currentUser, showAddUserForm }, dispatch] = useReducer(reducer, initialState);
 
-  function toggleForm() {
-    dispatch({ type: 'form/toggle' });
+  function toggleForm(showForm) {
+    dispatch({ type: 'form/toggle', payload: showForm });
   }
 
   function addUser(user) {
@@ -73,7 +85,9 @@ function TasksProvider({ children }) {
   }
 
   function toggleTask(id) {
-    dispatch({ type: 'task/toggle', payload: id });
+    const user = users.find((user) => user.id === currentUser.id);
+    const toggledTasks = user.tasks.map((task) => (task.id === id ? { ...task, done: !task.done } : { ...task }));
+    dispatch({ type: 'task/toggle', payload: toggledTasks });
   }
 
   function deleteTask(id) {
@@ -81,7 +95,7 @@ function TasksProvider({ children }) {
   }
 
   return (
-    <ListsContext.Provider
+    <TasksContext.Provider
       value={{
         users,
         currentUser,
@@ -96,7 +110,7 @@ function TasksProvider({ children }) {
       }}
     >
       {children}
-    </ListsContext.Provider>
+    </TasksContext.Provider>
   );
 }
 

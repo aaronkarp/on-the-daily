@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTasks } from '../contexts/TasksContext';
+import { Button, Input } from '@fluentui/react-components';
 
 function AddUserForm() {
   const { showAddUserForm, toggleForm, addUser, selectUser } = useTasks();
@@ -34,7 +35,7 @@ function AddUserForm() {
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="new-user-name">Name:</label>
-              <input
+              <Input
                 type="text"
                 id="new-user-name"
                 value={newUserName}
@@ -44,7 +45,7 @@ function AddUserForm() {
 
             <div>
               <label htmlFor="new-user-image">Image URL:</label>
-              <input
+              <Input
                 type="text"
                 id="new-user-image"
                 value={newUserImage}
@@ -53,7 +54,9 @@ function AddUserForm() {
             </div>
 
             <div>
-              <button>Add User</button>
+              <Button appearance="primary" size="large" onClick={handleSubmit}>
+                Add user
+              </Button>
             </div>
           </form>
         </div>

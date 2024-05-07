@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTasks } from '../contexts/TasksContext';
+import { Button, Input, Label } from '@fluentui/react-components';
 
 function AddTaskForm() {
   const { currentUser, addTask } = useTasks();
@@ -25,13 +26,11 @@ function AddTaskForm() {
     <footer>
       {currentUser ? (
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Task description"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-          />
-          <button>Add Task</button>
+          <Label for="newTask">Task description</Label>
+          <Input id="newTask" size="large" value={newTask} onChange={(e) => setNewTask(e.target.value)} />
+          <Button appearance="primary" size="large" onClick={handleSubmit}>
+            Add task
+          </Button>
         </form>
       ) : (
         ''

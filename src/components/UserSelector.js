@@ -1,5 +1,7 @@
+import { Button } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
 import User from './User';
+import { PersonAddRegular } from '@fluentui/react-icons';
 
 function UserSelector() {
   const { users, toggleForm } = useTasks();
@@ -12,7 +14,9 @@ function UserSelector() {
         ))}
       </ul>
       <div className="add-user-button">
-        <button onClick={() => toggleForm(true)}>Add User</button>
+        <Button appearance="primary" size="large" onClick={() => toggleForm(true)} icon={<PersonAddRegular />}>
+          Add user
+        </Button>
       </div>
     </div>
   );

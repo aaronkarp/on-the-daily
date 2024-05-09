@@ -4,22 +4,15 @@ const TasksContext = createContext();
 
 const initialState = {
   users: [],
-  currentUser: {},
-  showAddUserForm: false
+  currentUser: {}
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'form/toggle':
-      return {
-        ...state,
-        showAddUserForm: action.payload
-      };
     case 'user/add':
       return {
         ...state,
         users: [...state.users, action.payload],
-        showAddUserForm: false,
         currentUser: action.payload.id
       };
     case 'user/delete':
@@ -62,11 +55,7 @@ function reducer(state, action) {
 }
 
 function TasksProvider({ children }) {
-  const [{ users, currentUser, showAddUserForm }, dispatch] = useReducer(reducer, initialState);
-
-  function toggleForm(showForm) {
-    dispatch({ type: 'form/toggle', payload: showForm });
-  }
+  const [{ users, currentUser }, dispatch] = useReducer(reducer, initialState);
 
   function addUser(user) {
     dispatch({ type: 'user/add', payload: user });
@@ -99,8 +88,6 @@ function TasksProvider({ children }) {
       value={{
         users,
         currentUser,
-        showAddUserForm,
-        toggleForm,
         addUser,
         selectUser,
         deleteUser,

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTasks } from '../contexts/TasksContext';
-import { Button, Input, Label } from '@fluentui/react-components';
+import { Button, Field, Input, Label } from '@fluentui/react-components';
+import { TaskListSquareAddRegular } from '@fluentui/react-icons';
 
 function AddTaskForm() {
   const { currentUser, addTask } = useTasks();
@@ -24,11 +25,12 @@ function AddTaskForm() {
 
   return (
     <footer>
-      {currentUser ? (
+      {Object.keys(currentUser).length > 0 ? (
         <form onSubmit={handleSubmit}>
-          <Label for="newTask">Task description</Label>
-          <Input id="newTask" size="large" value={newTask} onChange={(e) => setNewTask(e.target.value)} />
-          <Button appearance="primary" size="large" onClick={handleSubmit}>
+          <Field label="Task description" size="large" orientation="horizontal">
+            <Input value={newTask} onChange={(e) => setNewTask(e.target.value)} />
+          </Field>
+          <Button appearance="primary" size="large" onClick={handleSubmit} icon={<TaskListSquareAddRegular />}>
             Add task
           </Button>
         </form>

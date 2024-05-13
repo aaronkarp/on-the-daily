@@ -13,12 +13,10 @@ function Task({ task }) {
   }
 
   return (
-    <li className="task-list-item">
-      <input type="checkbox" className="task-check" checked={task.done} onClick={handleToggle} />
-      <p className="task-name">{task.name}</p>
-      <button className="task-list-item-delete" onClick={handleDelete}>
-        ❌
-      </button>
+    <li>
+      <input type="checkbox" checked={task.done} onClick={handleToggle} />
+      <p>{task.name}</p>
+      <button onClick={handleDelete}>❌</button>
     </li>
   );
 }

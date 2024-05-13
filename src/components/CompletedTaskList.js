@@ -5,9 +5,9 @@ function CompletedTaskList() {
   const { users, currentUser } = useTasks();
   const completedTasks = users.find((user) => user.id === currentUser.id).tasks?.filter((task) => task.done);
   return (
-    <div className="completed-task-list">
+    <div>
       <h2>Done</h2>
-      <ul className="completed-task-list-container">
+      <ul>
         {completedTasks?.length > 0
           ? completedTasks.map((task) => (task.done ? <Task task={task} key={task.id} /> : ''))
           : ''}

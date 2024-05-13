@@ -11,13 +11,11 @@ function User({ user }) {
 
   return (
     <li className={`user-list-item ${user.id === currentUser?.id ? 'active' : ''}`}>
-      <button className="user-list-item-button" onClick={(e) => handleAlterUser(e, 'select')}>
+      <button onClick={(e) => handleAlterUser(e, 'select')}>
         <img src={user.image} alt={user.name} className="user-list-avatar" />
         <span>{user.name}</span>
       </button>
-      <button className="user-list-item-delete" onClick={(e) => handleAlterUser(e, 'delete')}>
-        ❌
-      </button>
+      <button onClick={(e) => handleAlterUser(e, 'delete')}>❌</button>
     </li>
   );
 }

@@ -44,13 +44,13 @@ function UserSelector() {
   }
 
   return (
-    <div className="user-selector">
-      <ul className="user-list">
+    <div>
+      <ul>
         {users.map((user) => (
           <User user={user} key={user.id} />
         ))}
       </ul>
-      <div className="add-user-button">
+      <div>
         <Dialog>
           <DialogTrigger disableButtonEnhancement>
             <Button appearance="primary" size="large" icon={<PersonAddRegular />}>

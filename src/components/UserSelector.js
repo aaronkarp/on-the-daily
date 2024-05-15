@@ -8,17 +8,34 @@ import {
   DialogActions,
   DialogContent,
   Field,
-  Input
+  Input,
+  makeStyles,
+  tokens
 } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
 import { PersonAddRegular } from '@fluentui/react-icons';
 import { useState } from 'react';
 import User from './User';
 
+const useStyles = makeStyles({
+  panel: {
+    backgroundColor: tokens.colorNeutralBackground1,
+    width: '20vw',
+    grow: 0,
+    boxShadow: tokens.shadow4,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
+
 function UserSelector() {
   const { users, addUser, selectUser } = useTasks();
   const [newUserName, setNewUserName] = useState('');
   const [newUserImage, setNewUserImage] = useState('');
+
+  const classes = useStyles();
 
   function handleSubmit(e) {
     if (newUserName === '' || newUserImage === '') {
@@ -44,7 +61,7 @@ function UserSelector() {
   }
 
   return (
-    <div>
+    <div className={classes.panel}>
       <ul>
         {users.map((user) => (
           <User user={user} key={user.id} />

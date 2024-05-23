@@ -13,7 +13,8 @@ const useStyles = makeStyles({
     maxWidth: '100vw',
     maxHeight: '100vh',
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)'
+    gridTemplateColumns: '3fr 1fr 1fr',
+    gridTemplateRows: '0.5fr 8fr 1fr'
   }
 });
 

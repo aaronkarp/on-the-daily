@@ -20,7 +20,7 @@ import User from './User';
 const useStyles = makeStyles({
   panel: {
     backgroundColor: tokens.colorNeutralBackground1,
-    width: '20vw',
+    width: '100%',
     grow: 0,
     boxShadow: tokens.shadow4,
     display: 'flex',

@@ -1,11 +1,21 @@
 import { useState } from 'react';
 import { useTasks } from '../contexts/TasksContext';
-import { Button, Field, Input, Label } from '@fluentui/react-components';
+import { Button, Field, Input, makeStyles } from '@fluentui/react-components';
 import { TaskListSquareAddRegular } from '@fluentui/react-icons';
+
+const useStyles = makeStyles({
+  footer: {
+    gridColumnStart: 1,
+    gridColumnEnd: 3,
+    gridRowStart: 3,
+    gridRowEnd: 4
+  }
+});
 
 function AddTaskForm() {
   const { currentUser, addTask } = useTasks();
   const [newTask, setNewTask] = useState('');
+  const classes = useStyles();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,7 +34,7 @@ function AddTaskForm() {
   }
 
   return (
-    <footer>
+    <footer className={classes.footer}>
       {Object.keys(currentUser).length > 0 ? (
         <form onSubmit={handleSubmit}>
           <Field label="Task description" size="large" orientation="horizontal">

@@ -26,7 +26,11 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    gridColumnStart: 3,
+    gridColumnEnd: 4,
+    gridRowStart: 2,
+    gridRowEnd: 4
   }
 });
 

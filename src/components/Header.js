@@ -9,7 +9,11 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    gridColumnStart: 1,
+    gridColumnEnd: 4,
+    gridRowStart: 1,
+    gridRowEnd: 2
   },
   headline: {
     ...shorthands.margin(tokens.spacingVerticalL, tokens.spacingHorizontalXL),

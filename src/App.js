@@ -6,16 +6,14 @@ import UserSelector from './components/UserSelector';
 import ListPanel from './components/ListPanel';
 
 const useStyles = makeStyles({
-  root: {
+  gridContainer: {
     backgroundColor: tokens.colorNeutralBackground3,
     width: '100vw',
-    height: '100vh'
-  },
-  main: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    justifyContent: 'space-between'
+    height: '100vh',
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)'
   }
 });
 
@@ -24,14 +22,10 @@ export default function App() {
   return (
     <FluentProvider theme={webLightTheme}>
       <TasksProvider>
-        <div className={classes.root}>
+        <div className={classes.gridContainer}>
           <Header />
-          <div className={classes.main}>
-            <main>
-              <ListPanel />
-            </main>
-            <UserSelector />
-          </div>
+          <ListPanel />
+          <UserSelector />
           <AddTaskForm />
         </div>
       </TasksProvider>

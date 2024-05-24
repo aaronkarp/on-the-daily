@@ -66,11 +66,15 @@ function UserSelector() {
 
   return (
     <div className={classes.panel}>
-      <ul>
-        {users.map((user) => (
-          <User user={user} key={user.id} />
-        ))}
-      </ul>
+      {users.length > 0 ? (
+        <ul>
+          {users.map((user) => (
+            <User user={user} key={user.id} />
+          ))}
+        </ul>
+      ) : (
+        ''
+      )}
       <div>
         <Dialog>
           <DialogTrigger disableButtonEnhancement>

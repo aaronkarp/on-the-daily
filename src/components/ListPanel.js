@@ -1,4 +1,4 @@
-import { makeStyles } from '@fluentui/react-components';
+import { makeStyles, mergeClasses } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
 import CompletedTaskList from './CompletedTaskList';
 import StartScreen from './StartScreen';
@@ -10,6 +10,13 @@ const useStyles = makeStyles({
     gridColumnEnd: 3,
     gridRowStart: 2,
     gridRowEnd: 3
+  },
+  startPanel: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: '100%',
+    gridRowEnd: 4
   }
 });
 
@@ -24,7 +31,11 @@ function ListPanel() {
       </div>
     );
   } else {
-    return <StartScreen className={classes.mainPanel} />;
+    return (
+      <div className={mergeClasses(classes.mainPanel, classes.startPanel)}>
+        <StartScreen />
+      </div>
+    );
   }
 }
 

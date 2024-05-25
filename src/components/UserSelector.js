@@ -15,7 +15,7 @@ import {
 import { useTasks } from '../contexts/TasksContext';
 import { PersonAddRegular } from '@fluentui/react-icons';
 import { useState } from 'react';
-import User from './User';
+import UserList from './UserList';
 
 const useStyles = makeStyles({
   panel: {
@@ -66,15 +66,7 @@ function UserSelector() {
 
   return (
     <div className={classes.panel}>
-      {users.length > 0 ? (
-        <ul>
-          {users.map((user) => (
-            <User user={user} key={user.id} />
-          ))}
-        </ul>
-      ) : (
-        ''
-      )}
+      {users.length > 0 && <UserList />}
       <div>
         <Dialog>
           <DialogTrigger disableButtonEnhancement>

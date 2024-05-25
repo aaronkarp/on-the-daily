@@ -1,10 +1,23 @@
-import { makeStyles, tokens, shorthands, Avatar, Button, mergeClasses } from '@fluentui/react-components';
+import {
+  makeStyles,
+  tokens,
+  shorthands,
+  Avatar,
+  Button,
+  mergeClasses,
+  Popover,
+  PopoverTrigger,
+  PopoverSurface,
+  Tooltip
+} from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
-import { CheckboxChecked20Regular, CheckboxUnchecked20Regular } from '@fluentui/react-icons';
+import { CheckboxCheckedRegular, CheckboxUncheckedRegular, MoreHorizontalRegular } from '@fluentui/react-icons';
 
 const useStyles = makeStyles({
+  listItem: {
+    position: 'relative'
+  },
   button: {
-    border: 'none',
     borderRadius: 0,
     width: '100%',
     gap: tokens.spacingHorizontalL,
@@ -32,9 +45,14 @@ const useStyles = makeStyles({
     marginTop: tokens.spacingVerticalXS
   },
   taskCount: {
-    fontSize: tokens.fontSizeBase200,
+    fontSize: tokens.fontSizeBase300,
     fontWeight: tokens.fontWeightRegular,
     color: tokens.colorNeutralForeground3
+  },
+  menuButton: {
+    position: 'absolute',
+    right: tokens.spacingHorizontalS,
+    top: tokens.spacingVerticalS
   }
 });
 
@@ -52,8 +70,9 @@ function User({ user }) {
   }
 
   return (
-    <li>
+    <li className={classes.listItem}>
       <Button
+        appearance="subtle"
         onClick={(e) => handleAlterUser(e, 'select')}
         className={
           user.id === currentUser.id
@@ -74,15 +93,22 @@ function User({ user }) {
           <p className={mergeClasses(classes.name, classes.leftPara)}>{user.name}</p>
           <div className={mergeClasses(classes.secondaryText, classes.flexRow)}>
             <p className={mergeClasses(classes.taskCount, classes.leftPara, classes.flexRow)}>
-              <CheckboxUnchecked20Regular /> {undoneTasks.length}
+              <CheckboxUncheckedRegular /> {undoneTasks.length}
             </p>
             <p className={mergeClasses(classes.taskCount, classes.leftPara, classes.flexRow)}>
-              <CheckboxChecked20Regular /> {doneTasks.length}
+              <CheckboxCheckedRegular /> {doneTasks.length}
             </p>
           </div>
         </div>
       </Button>
-      <Button onClick={(e) => handleAlterUser(e, 'delete')}>❌</Button>
+      <Popover>
+        <PopoverTrigger disableButtonEnhancement>
+          <Tooltip content="User settings">
+            <Button appearance="subtle" icon={<MoreHorizontalRegular />} className={classes.menuButton} />
+          </Tooltip>
+        </PopoverTrigger>
+        <PopoverSurface tabIndex={-1}>User Settings Menu</PopoverSurface>
+      </Popover>
     </li>
   );
 }

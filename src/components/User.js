@@ -8,10 +8,22 @@ import {
   Popover,
   PopoverTrigger,
   PopoverSurface,
-  Tooltip
+  Tooltip,
+  Dialog,
+  DialogTrigger,
+  DialogSurface,
+  DialogBody,
+  DialogTitle,
+  DialogContent,
+  DialogActions
 } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
-import { CheckboxCheckedRegular, CheckboxUncheckedRegular, MoreHorizontalRegular } from '@fluentui/react-icons';
+import {
+  CheckboxCheckedRegular,
+  CheckboxUncheckedRegular,
+  DeleteRegular,
+  MoreHorizontalRegular
+} from '@fluentui/react-icons';
 
 const useStyles = makeStyles({
   listItem: {
@@ -25,7 +37,7 @@ const useStyles = makeStyles({
     ...shorthands.padding(tokens.spacingVerticalL, tokens.spacingHorizontalL)
   },
   active: {
-    backgroundColor: tokens.colorSubtleBackgroundSelected
+    backgroundColor: tokens.colorBrandBackgroundInvertedSelected
   },
   flexRow: {
     display: 'flex',
@@ -101,13 +113,35 @@ function User({ user }) {
           </div>
         </div>
       </Button>
-      <Popover>
+      <Popover size="small">
         <PopoverTrigger disableButtonEnhancement>
           <Tooltip content="User settings">
             <Button appearance="subtle" icon={<MoreHorizontalRegular />} className={classes.menuButton} />
           </Tooltip>
         </PopoverTrigger>
-        <PopoverSurface tabIndex={-1}>User Settings Menu</PopoverSurface>
+        <PopoverSurface>
+          <Dialog modalType="alert">
+            <DialogTrigger disableButtonEnhancement>
+              <Button appearance="subtle" icon={<DeleteRegular />}>
+                Delete user
+              </Button>
+            </DialogTrigger>
+            <DialogSurface>
+              <DialogBody>
+                <DialogTitle>Delete user</DialogTitle>
+                <DialogContent>Delete this user and all of their tasks? This action cannot be undone.</DialogContent>
+                <DialogActions>
+                  <DialogTrigger disableButtonEnhancement>
+                    <Button appearance="secondary">Cancel</Button>
+                  </DialogTrigger>
+                  <Button appearance="primary" onClick={(e) => handleAlterUser(e, 'delete')}>
+                    Delete user
+                  </Button>
+                </DialogActions>
+              </DialogBody>
+            </DialogSurface>
+          </Dialog>
+        </PopoverSurface>
       </Popover>
     </li>
   );

@@ -15,6 +15,15 @@ function reducer(state, action) {
         users: [...state.users, action.payload],
         currentUser: action.payload.id
       };
+    case 'user/edit':
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id
+            ? { ...user, name: action.payload.name, image: action.payload.image }
+            : { ...user }
+        )
+      };
     case 'user/delete':
       return {
         ...state,
@@ -61,6 +70,10 @@ function TasksProvider({ children }) {
     dispatch({ type: 'user/add', payload: user });
   }
 
+  function editUser(user) {
+    dispatch({ type: 'user/edit', payload: user });
+  }
+
   function selectUser(user) {
     dispatch({ type: 'user/select', payload: user });
   }
@@ -89,6 +102,7 @@ function TasksProvider({ children }) {
         users,
         currentUser,
         addUser,
+        editUser,
         selectUser,
         deleteUser,
         addTask,

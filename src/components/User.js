@@ -5,25 +5,28 @@ import {
   Avatar,
   Button,
   mergeClasses,
-  Popover,
-  PopoverTrigger,
-  PopoverSurface,
   Tooltip,
   Dialog,
-  DialogTrigger,
   DialogSurface,
-  DialogBody,
-  DialogTitle,
-  DialogContent,
-  DialogActions
+  Tag,
+  Menu,
+  MenuPopover,
+  MenuTrigger,
+  MenuList,
+  MenuItem,
+  useRestoreFocusTarget
 } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
 import {
-  CheckboxCheckedRegular,
-  CheckboxUncheckedRegular,
+  CheckboxChecked20Regular,
+  CheckboxUnchecked20Regular,
   DeleteRegular,
-  MoreHorizontalRegular
+  MoreHorizontalRegular,
+  PersonEditRegular
 } from '@fluentui/react-icons';
+import ConfirmDeleteUser from './ConfirmDeleteUser';
+import UpdateUserForm from './UpdateUserForm';
+import { useState } from 'react';
 
 const useStyles = makeStyles({
   listItem: {
@@ -39,9 +42,23 @@ const useStyles = makeStyles({
   active: {
     backgroundColor: tokens.colorBrandBackgroundInvertedSelected
   },
+  flex: {
+    display: 'flex'
+  },
   flexRow: {
-    display: 'flex',
+    flexDirection: 'row'
+  },
+  flexCol: {
+    flexDirection: 'column'
+  },
+  flexAlignCenter: {
     alignItems: 'center'
+  },
+  flexAlignStretch: {
+    alignItems: 'stretch'
+  },
+  flexJustifyStart: {
+    justifyContent: 'flex-start'
   },
   leftPara: {
     margin: 0,
@@ -52,9 +69,7 @@ const useStyles = makeStyles({
   },
   secondaryText: {
     justifyContent: 'flex-start',
-    gap: tokens.spacingHorizontalMNudge,
-    marginLeft: tokens.spacingHorizontalS,
-    marginTop: tokens.spacingVerticalXS
+    gap: tokens.spacingHorizontalMNudge
   },
   taskCount: {
     fontSize: tokens.fontSizeBase300,
@@ -65,31 +80,44 @@ const useStyles = makeStyles({
     position: 'absolute',
     right: tokens.spacingHorizontalS,
     top: tokens.spacingVerticalS
+  },
+  menuNoPad: {
+    padding: 0
+  },
+  tag: {
+    marginTop: tokens.spacingVerticalS
   }
 });
 
 function User({ user }) {
-  const { currentUser, selectUser, deleteUser } = useTasks();
+  const { currentUser, selectUser } = useTasks();
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const restoreFocusTargetAttribute = useRestoreFocusTarget();
   const classes = useStyles();
 
   const undoneTasks = user.tasks.filter((task) => task.done !== true);
   const doneTasks = user.tasks.filter((task) => task.done);
 
-  function handleAlterUser(e, mode) {
+  function handleSelect(e) {
     e.preventDefault();
-    if (mode === 'select') selectUser(user);
-    if (mode === 'delete') deleteUser(user.id);
+    selectUser(user);
+  }
+
+  function handleDialog(e, dialog) {
+    if (dialog === 'edit') setEditOpen(true);
+    if (dialog === 'delete') setDeleteOpen(true);
   }
 
   return (
     <li className={classes.listItem}>
       <Button
         appearance="subtle"
-        onClick={(e) => handleAlterUser(e, 'select')}
+        onClick={handleSelect}
         className={
           user.id === currentUser.id
-            ? mergeClasses(classes.button, classes.active, classes.flexRow)
-            : mergeClasses(classes.button, classes.flexRow)
+            ? mergeClasses(classes.button, classes.active, classes.flex, classes.flexRow, classes.flexAlignCenter)
+            : mergeClasses(classes.button, classes.flex, classes.flexRow, classes.flexAlignCenter)
         }
       >
         <Avatar
@@ -103,46 +131,82 @@ function User({ user }) {
         />
         <div>
           <p className={mergeClasses(classes.name, classes.leftPara)}>{user.name}</p>
-          <div className={mergeClasses(classes.secondaryText, classes.flexRow)}>
-            <p className={mergeClasses(classes.taskCount, classes.leftPara, classes.flexRow)}>
-              <CheckboxUncheckedRegular /> {undoneTasks.length}
-            </p>
-            <p className={mergeClasses(classes.taskCount, classes.leftPara, classes.flexRow)}>
-              <CheckboxCheckedRegular /> {doneTasks.length}
-            </p>
-          </div>
+          <Tag shape="circular" appearance="brand" className={classes.tag}>
+            <div
+              className={mergeClasses(classes.secondaryText, classes.flex, classes.flexRow, classes.flexAlignCenter)}
+            >
+              <p
+                className={mergeClasses(
+                  classes.taskCount,
+                  classes.leftPara,
+                  classes.flex,
+                  classes.flexRow,
+                  classes.flexAlignCenter
+                )}
+              >
+                <CheckboxUnchecked20Regular /> {undoneTasks.length}
+              </p>
+              <p
+                className={mergeClasses(
+                  classes.taskCount,
+                  classes.leftPara,
+                  classes.flex,
+                  classes.flexRow,
+                  classes.flexAlignCenter
+                )}
+              >
+                <CheckboxChecked20Regular /> {doneTasks.length}
+              </p>
+            </div>
+          </Tag>
         </div>
       </Button>
-      <Popover size="small">
-        <PopoverTrigger disableButtonEnhancement>
+      <Menu>
+        <MenuTrigger disableButtonEnhancement>
           <Tooltip content="User settings">
             <Button appearance="subtle" icon={<MoreHorizontalRegular />} className={classes.menuButton} />
           </Tooltip>
-        </PopoverTrigger>
-        <PopoverSurface>
-          <Dialog modalType="alert">
-            <DialogTrigger disableButtonEnhancement>
-              <Button appearance="subtle" icon={<DeleteRegular />}>
-                Delete user
-              </Button>
-            </DialogTrigger>
-            <DialogSurface>
-              <DialogBody>
-                <DialogTitle>Delete user</DialogTitle>
-                <DialogContent>Delete this user and all of their tasks? This action cannot be undone.</DialogContent>
-                <DialogActions>
-                  <DialogTrigger disableButtonEnhancement>
-                    <Button appearance="secondary">Cancel</Button>
-                  </DialogTrigger>
-                  <Button appearance="primary" onClick={(e) => handleAlterUser(e, 'delete')}>
-                    Delete user
-                  </Button>
-                </DialogActions>
-              </DialogBody>
-            </DialogSurface>
-          </Dialog>
-        </PopoverSurface>
-      </Popover>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem
+              {...restoreFocusTargetAttribute}
+              icon={<PersonEditRegular />}
+              onClick={(e) => handleDialog(e, 'edit')}
+            >
+              Edit user
+            </MenuItem>
+            <MenuItem
+              {...restoreFocusTargetAttribute}
+              icon={<DeleteRegular />}
+              onClick={(e) => handleDialog(e, 'delete')}
+            >
+              Delete user
+            </MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <Dialog
+        open={editOpen}
+        onOpenChange={(event, data) => {
+          setEditOpen(data.open);
+        }}
+      >
+        <DialogSurface>
+          <UpdateUserForm mode="edit-user" user={user} />
+        </DialogSurface>
+      </Dialog>
+      <Dialog
+        open={deleteOpen}
+        onOpenChange={(event, data) => {
+          setDeleteOpen(data.open);
+        }}
+        modalType="alert"
+      >
+        <DialogSurface>
+          <ConfirmDeleteUser user={user} />
+        </DialogSurface>
+      </Dialog>
     </li>
   );
 }

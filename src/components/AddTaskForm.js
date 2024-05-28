@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useTasks } from '../contexts/TasksContext';
-import { Button, Field, Input, makeStyles } from '@fluentui/react-components';
+import { Button, Input, Label, makeStyles, tokens, shorthands } from '@fluentui/react-components';
 import { TaskListSquareAddRegular } from '@fluentui/react-icons';
 
 const useStyles = makeStyles({
@@ -8,16 +8,38 @@ const useStyles = makeStyles({
     gridColumnStart: 1,
     gridColumnEnd: 3,
     gridRowStart: 3,
-    gridRowEnd: 4
+    gridRowEnd: 4,
+    color: tokens.colorNeutralForeground1,
+    backgroundColor: tokens.colorNeutralBackground1,
+    boxShadow: tokens.shadow4,
+    borderRadius: tokens.borderRadiusLarge,
+    ...shorthands.margin(tokens.spacingVerticalM, tokens.spacingHorizontalL)
+  },
+  form: {
+    ...shorthands.margin(tokens.spacingVerticalL, tokens.spacingHorizontalL)
+  },
+  formContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: tokens.spacingHorizontalL,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    ...shorthands.margin(0, 'auto')
+  },
+  input: {
+    flexGrow: 2
   }
 });
 
 function AddTaskForm() {
   const { currentUser, addTask } = useTasks();
   const [newTask, setNewTask] = useState('');
-  const classes = useStyles();
 
   function handleSubmit(e) {
+    if (newTask === '') {
+      return;
+    }
     e.preventDefault();
     const newId = crypto.randomUUID();
     const task = {
@@ -33,21 +55,33 @@ function AddTaskForm() {
     setNewTask('');
   }
 
-  return (
+  const inputId = useId('input');
+  const classes = useStyles();
+
+  return Object.keys(currentUser).length > 0 ? (
     <footer className={classes.footer}>
-      {Object.keys(currentUser).length > 0 ? (
-        <form onSubmit={handleSubmit}>
-          <Field label="Task description" size="large" orientation="horizontal">
-            <Input value={newTask} onChange={(e) => setNewTask(e.target.value)} />
-          </Field>
+      <form onSubmit={handleSubmit} className={classes.form}>
+        <div className={classes.formContainer}>
+          <Label htmlFor={inputId} size="large" required>
+            Task description
+          </Label>
+          <Input
+            className={classes.input}
+            id={inputId}
+            size="large"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            aria-required
+            required
+          />
           <Button appearance="primary" size="large" onClick={handleSubmit} icon={<TaskListSquareAddRegular />}>
             Add task
           </Button>
-        </form>
-      ) : (
-        ''
-      )}
+        </div>
+      </form>
     </footer>
+  ) : (
+    ''
   );
 }
 

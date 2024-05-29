@@ -1,6 +1,5 @@
 import { makeStyles, mergeClasses } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
-import CompletedTaskList from './CompletedTaskList';
 import StartScreen from './StartScreen';
 import TaskList from './TaskList';
 
@@ -26,8 +25,8 @@ function ListPanel() {
   if (Object.keys(currentUser).length > 0) {
     return (
       <div className={classes.mainPanel}>
-        <TaskList />
-        <CompletedTaskList />
+        <TaskList variant="incomplete" />
+        <TaskList variant="complete" />
       </div>
     );
   } else {

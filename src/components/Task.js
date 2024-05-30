@@ -1,3 +1,4 @@
+import { Card } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
 
 function Task({ task }) {
@@ -14,9 +15,11 @@ function Task({ task }) {
 
   return (
     <li>
-      <input type="checkbox" checked={task.done} onClick={handleToggle} />
-      <p>{task.name}</p>
-      <button onClick={handleDelete}>❌</button>
+      <Card>
+        <input type="checkbox" checked={task.done} onClick={handleToggle} />
+        <p>{task.name}</p>
+        <button onClick={handleDelete}>❌</button>
+      </Card>
     </li>
   );
 }

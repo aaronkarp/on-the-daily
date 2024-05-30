@@ -1,4 +1,4 @@
-import { makeStyles, mergeClasses } from '@fluentui/react-components';
+import { makeStyles, mergeClasses, shorthands, tokens } from '@fluentui/react-components';
 import { useTasks } from '../contexts/TasksContext';
 import StartScreen from './StartScreen';
 import TaskList from './TaskList';
@@ -8,7 +8,13 @@ const useStyles = makeStyles({
     gridColumnStart: 1,
     gridColumnEnd: 3,
     gridRowStart: 2,
-    gridRowEnd: 3
+    gridRowEnd: 3,
+    display: 'grid',
+    gridTemplateColumns: '2fr 1fr',
+    backgroundColor: tokens.colorNeutralBackground1,
+    boxShadow: tokens.shadow4,
+    borderRadius: tokens.borderRadiusLarge,
+    ...shorthands.margin(tokens.spacingVerticalM, tokens.spacingHorizontalL, tokens.spacingVerticalXS)
   },
   startPanel: {
     display: 'flex',

@@ -7,10 +7,17 @@ const useStyles = makeStyles({
     color: tokens.colorNeutralForeground4,
     fontWeight: tokens.fontWeightMedium,
     fontSize: tokens.fontSizeHero900,
-    marginTop: 0
+    marginTop: 0,
+    lineHeight: 1
   },
   listContainer: {
-    ...shorthands.margin(tokens.spacingVerticalL, tokens.spacingHorizontalL)
+    ...shorthands.padding(
+      tokens.spacingVerticalL,
+      tokens.spacingHorizontalXL,
+      tokens.spacingVerticalL,
+      tokens.spacingHorizontalL
+    ),
+    overflowY: 'auto'
   },
   list: {
     listStyleType: 'none',

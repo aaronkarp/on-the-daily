@@ -5,6 +5,7 @@ import TaskList from './TaskList';
 
 const useStyles = makeStyles({
   mainPanel: {
+    maxHeight: '100%',
     gridColumnStart: 1,
     gridColumnEnd: 3,
     gridRowStart: 2,

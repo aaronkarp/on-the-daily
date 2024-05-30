@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     maxHeight: '100vh',
     display: 'grid',
     gridTemplateColumns: '3fr 1fr 1fr',
-    gridTemplateRows: '0.5fr 8fr 1fr'
+    gridTemplateRows: '6.15dvh 82.56dvh 11.29dvh'
   }
 });
 

@@ -31,7 +31,7 @@ function TaskList({ variant }) {
     <div className={classes.listContainer}>
       <h2 className={classes.title}>{variant === 'incomplete' ? 'To Do' : 'Done'}</h2>
       <ul className={classes.list}>
-        {tasks?.length > 0 ? tasks.map((task) => (!task.done ? <Task task={task} key={task.id} /> : '')) : ''}
+        {tasks?.length > 0 ? tasks.map((task) => <Task task={task} key={task.id} />) : ''}
       </ul>
     </div>
   );

@@ -13,9 +13,7 @@ const useStyles = makeStyles({
     display: 'grid',
     gridTemplateColumns: '2fr 1fr',
     backgroundColor: tokens.colorNeutralBackground1,
-    boxShadow: tokens.shadow4,
-    borderRadius: tokens.borderRadiusLarge,
-    ...shorthands.margin(tokens.spacingVerticalM, tokens.spacingHorizontalL, tokens.spacingVerticalXS)
+    boxShadow: tokens.shadow
   },
   startPanel: {
     display: 'flex',

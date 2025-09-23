@@ -13,13 +13,13 @@ const useStyles = makeStyles({
     gridColumnStart: 1,
     gridColumnEnd: 4,
     gridRowStart: 1,
-    gridRowEnd: 2
+    gridRowEnd: 2,
   },
   headline: {
     ...shorthands.margin(tokens.spacingVerticalL, tokens.spacingHorizontalXL),
     fontWeight: tokens.fontWeightMedium,
-    fontSize: tokens.fontSizeBase400
-  }
+    fontSize: tokens.fontSizeHero800,
+  },
 });
 
 function Header() {
@@ -28,7 +28,9 @@ function Header() {
   return (
     <header className={classes.header}>
       <h1 className={classes.headline}>
-        {Object.keys(currentUser).length > 0 ? `${currentUser.name}'s Tasks` : 'On the Daily'}
+        {Object.keys(currentUser).length > 0
+          ? `${currentUser.name}'s Tasks`
+          : 'On the Daily'}
       </h1>
     </header>
   );

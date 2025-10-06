@@ -1,6 +1,13 @@
 import { useId, useState } from 'react';
-import { useTasks } from '../contexts/TasksContext';
-import { Button, Input, Label, makeStyles, tokens, shorthands } from '@fluentui/react-components';
+import { useTasks } from '../src/contexts/TasksContext';
+import {
+  Button,
+  Input,
+  Label,
+  makeStyles,
+  tokens,
+  shorthands,
+} from '@fluentui/react-components';
 import { TaskListSquareAddRegular } from '@fluentui/react-icons';
 
 const useStyles = makeStyles({
@@ -13,10 +20,10 @@ const useStyles = makeStyles({
     backgroundColor: tokens.colorNeutralBackground1,
     boxShadow: tokens.shadow4,
     borderRadius: tokens.borderRadiusLarge,
-    ...shorthands.margin(tokens.spacingVerticalM, tokens.spacingHorizontalL)
+    ...shorthands.margin(tokens.spacingVerticalM, tokens.spacingHorizontalL),
   },
   form: {
-    ...shorthands.margin(tokens.spacingVerticalL, tokens.spacingHorizontalL)
+    ...shorthands.margin(tokens.spacingVerticalL, tokens.spacingHorizontalL),
   },
   formContainer: {
     width: '100%',
@@ -25,11 +32,11 @@ const useStyles = makeStyles({
     gap: tokens.spacingHorizontalL,
     alignItems: 'center',
     justifyContent: 'space-between',
-    ...shorthands.margin(0, 'auto')
+    ...shorthands.margin(0, 'auto'),
   },
   input: {
-    flexGrow: 2
-  }
+    flexGrow: 2,
+  },
 });
 
 function AddTaskForm() {
@@ -45,7 +52,7 @@ function AddTaskForm() {
     const task = {
       id: newId,
       name: newTask,
-      done: false
+      done: false,
     };
     addTask(task);
     resetForm();
@@ -74,7 +81,12 @@ function AddTaskForm() {
             aria-required
             required
           />
-          <Button appearance="primary" size="large" onClick={handleSubmit} icon={<TaskListSquareAddRegular />}>
+          <Button
+            appearance="primary"
+            size="large"
+            onClick={handleSubmit}
+            icon={<TaskListSquareAddRegular />}
+          >
             Add task
           </Button>
         </div>

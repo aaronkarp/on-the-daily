@@ -1,5 +1,12 @@
-import { Button, Dialog, DialogTrigger, DialogSurface, makeStyles, tokens } from '@fluentui/react-components';
-import { useTasks } from '../contexts/TasksContext';
+import {
+  Button,
+  Dialog,
+  DialogTrigger,
+  DialogSurface,
+  makeStyles,
+  tokens,
+} from '@fluentui/react-components';
+import { useTasks } from '../src/contexts/TasksContext';
 import { PersonAddRegular } from '@fluentui/react-icons';
 import UserList from './UserList';
 import UpdateUserForm from './UpdateUserForm';
@@ -17,8 +24,8 @@ const useStyles = makeStyles({
     gridColumnStart: 3,
     gridColumnEnd: 4,
     gridRowStart: 2,
-    gridRowEnd: 4
-  }
+    gridRowEnd: 4,
+  },
 });
 
 function UserSelector() {
@@ -32,7 +39,11 @@ function UserSelector() {
       <div>
         <Dialog>
           <DialogTrigger disableButtonEnhancement>
-            <Button appearance="primary" size="large" icon={<PersonAddRegular />}>
+            <Button
+              appearance="primary"
+              size="large"
+              icon={<PersonAddRegular />}
+            >
               Add user
             </Button>
           </DialogTrigger>

@@ -14,15 +14,15 @@ import {
   MenuTrigger,
   MenuList,
   MenuItem,
-  useRestoreFocusTarget
+  useRestoreFocusTarget,
 } from '@fluentui/react-components';
-import { useTasks } from '../contexts/TasksContext';
+import { useTasks } from '../src/contexts/TasksContext';
 import {
   CheckboxChecked20Regular,
   CheckboxUnchecked20Regular,
   DeleteRegular,
   MoreHorizontalRegular,
-  PersonEditRegular
+  PersonEditRegular,
 } from '@fluentui/react-icons';
 import ConfirmDeleteUser from './ConfirmDeleteUser';
 import UpdateUserForm from './UpdateUserForm';
@@ -30,63 +30,63 @@ import { useState } from 'react';
 
 const useStyles = makeStyles({
   listItem: {
-    position: 'relative'
+    position: 'relative',
   },
   button: {
     borderRadius: 0,
     width: '100%',
     gap: tokens.spacingHorizontalL,
     justifyContent: 'flex-start',
-    ...shorthands.padding(tokens.spacingVerticalL, tokens.spacingHorizontalL)
+    ...shorthands.padding(tokens.spacingVerticalL, tokens.spacingHorizontalL),
   },
   active: {
-    backgroundColor: tokens.colorBrandBackgroundInvertedSelected
+    backgroundColor: tokens.colorBrandBackgroundInvertedSelected,
   },
   flex: {
-    display: 'flex'
+    display: 'flex',
   },
   flexRow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   flexCol: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   flexAlignCenter: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   flexAlignStretch: {
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
   flexJustifyStart: {
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   leftPara: {
     margin: 0,
-    textAlign: 'left'
+    textAlign: 'left',
   },
   name: {
-    fontSize: tokens.fontSizeBase500
+    fontSize: tokens.fontSizeBase500,
   },
   secondaryText: {
     justifyContent: 'flex-start',
-    gap: tokens.spacingHorizontalMNudge
+    gap: tokens.spacingHorizontalMNudge,
   },
   taskCount: {
     fontSize: tokens.fontSizeBase300,
     fontWeight: tokens.fontWeightRegular,
-    color: tokens.colorNeutralForeground3
+    color: tokens.colorNeutralForeground3,
   },
   menuButton: {
     position: 'absolute',
     right: tokens.spacingHorizontalS,
-    top: tokens.spacingVerticalS
+    top: tokens.spacingVerticalS,
   },
   menuNoPad: {
-    padding: 0
+    padding: 0,
   },
   tag: {
-    marginTop: tokens.spacingVerticalS
-  }
+    marginTop: tokens.spacingVerticalS,
+  },
 });
 
 function User({ user }) {
@@ -116,8 +116,19 @@ function User({ user }) {
         onClick={handleSelect}
         className={
           user.id === currentUser.id
-            ? mergeClasses(classes.button, classes.active, classes.flex, classes.flexRow, classes.flexAlignCenter)
-            : mergeClasses(classes.button, classes.flex, classes.flexRow, classes.flexAlignCenter)
+            ? mergeClasses(
+                classes.button,
+                classes.active,
+                classes.flex,
+                classes.flexRow,
+                classes.flexAlignCenter
+              )
+            : mergeClasses(
+                classes.button,
+                classes.flex,
+                classes.flexRow,
+                classes.flexAlignCenter
+              )
         }
       >
         <Avatar
@@ -126,14 +137,21 @@ function User({ user }) {
           size={64}
           name={user.name}
           image={{
-            src: user.image
+            src: user.image,
           }}
         />
         <div>
-          <p className={mergeClasses(classes.name, classes.leftPara)}>{user.name}</p>
+          <p className={mergeClasses(classes.name, classes.leftPara)}>
+            {user.name}
+          </p>
           <Tag shape="circular" appearance="brand" className={classes.tag}>
             <div
-              className={mergeClasses(classes.secondaryText, classes.flex, classes.flexRow, classes.flexAlignCenter)}
+              className={mergeClasses(
+                classes.secondaryText,
+                classes.flex,
+                classes.flexRow,
+                classes.flexAlignCenter
+              )}
             >
               <p
                 className={mergeClasses(
@@ -164,7 +182,11 @@ function User({ user }) {
       <Menu>
         <MenuTrigger disableButtonEnhancement>
           <Tooltip content="User settings">
-            <Button appearance="subtle" icon={<MoreHorizontalRegular />} className={classes.menuButton} />
+            <Button
+              appearance="subtle"
+              icon={<MoreHorizontalRegular />}
+              className={classes.menuButton}
+            />
           </Tooltip>
         </MenuTrigger>
         <MenuPopover>

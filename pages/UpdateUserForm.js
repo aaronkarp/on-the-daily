@@ -6,9 +6,9 @@ import {
   DialogTitle,
   DialogTrigger,
   Field,
-  Input
+  Input,
 } from '@fluentui/react-components';
-import { useTasks } from '../contexts/TasksContext';
+import { useTasks } from '../src/contexts/TasksContext';
 import { useState } from 'react';
 
 function UpdateUserForm({ mode, user }) {
@@ -24,7 +24,7 @@ function UpdateUserForm({ mode, user }) {
       id: newId,
       name: newUserName,
       image: newUserImage,
-      tasks: []
+      tasks: [],
     };
     if (mode === 'add-user') addUser(newUser);
     if (mode === 'edit-user') editUser(newUser);
@@ -43,10 +43,18 @@ function UpdateUserForm({ mode, user }) {
         <DialogTitle>{mode === 'add-user' ? 'Add' : 'Edit'} user</DialogTitle>
         <DialogContent>
           <Field label="Name" required>
-            <Input size="large" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
+            <Input
+              size="large"
+              value={newUserName}
+              onChange={(e) => setNewUserName(e.target.value)}
+            />
           </Field>
           <Field label="Image URL" required>
-            <Input size="large" value={newUserImage} onChange={(e) => setNewUserImage(e.target.value)} />
+            <Input
+              size="large"
+              value={newUserImage}
+              onChange={(e) => setNewUserImage(e.target.value)}
+            />
           </Field>
         </DialogContent>
         <DialogActions>

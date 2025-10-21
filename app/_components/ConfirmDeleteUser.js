@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@fluentui/react-components';
-import { useTasks } from '../src/contexts/TasksContext';
+import { useTasks } from '../../src/contexts/TasksContext';
 
 function ConfirmDeleteUser({ user }) {
   const { deleteUser } = useTasks();

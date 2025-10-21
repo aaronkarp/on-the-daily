@@ -5,7 +5,7 @@ import {
   mergeClasses,
   tokens,
 } from '@fluentui/react-components';
-import { useTasks } from '../src/contexts/TasksContext';
+import { useTasks } from '../../src/contexts/TasksContext';
 import { DeleteRegular } from '@fluentui/react-icons';
 
 const useStyles = makeStyles({

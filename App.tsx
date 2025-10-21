@@ -5,10 +5,10 @@ import {
   tokens,
   webLightTheme,
 } from '@fluentui/react-components';
-import AddTaskForm from './pages/AddTaskForm';
-import Header from './pages/Header';
-import UserSelector from './pages/UserSelector';
-import ListPanel from './pages/ListPanel';
+import AddTaskForm from './app/_components/AddTaskForm';
+import Header from './app/_components/Header';
+import UserSelector from './app/_components/UserSelector';
+import ListPanel from './app/_components/ListPanel';
 
 const useStyles = makeStyles({
   gridContainer: {

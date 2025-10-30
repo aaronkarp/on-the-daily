@@ -1,9 +1,14 @@
-import { TasksProvider } from './contexts/TasksContext';
-import { FluentProvider, makeStyles, tokens, webLightTheme } from '@fluentui/react-components';
-import AddTaskForm from './components/AddTaskForm';
-import Header from './components/Header';
-import UserSelector from './components/UserSelector';
-import ListPanel from './components/ListPanel';
+import { TasksProvider } from './src/contexts/TasksContext';
+import {
+  FluentProvider,
+  makeStyles,
+  tokens,
+  webLightTheme,
+} from '@fluentui/react-components';
+import AddTaskForm from './app/_components/AddTaskForm';
+import Header from './app/_components/Header';
+import UserSelector from './app/_components/UserSelector';
+import ListPanel from './app/_components/ListPanel';
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -14,8 +19,8 @@ const useStyles = makeStyles({
     maxHeight: '100vh',
     display: 'grid',
     gridTemplateColumns: '3fr 1fr 1fr',
-    gridTemplateRows: '6.15dvh 82.56dvh 11.29dvh'
-  }
+    gridTemplateRows: '6.15dvh 82.56dvh 11.29dvh',
+  },
 });
 
 export default function App() {

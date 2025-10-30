@@ -4,9 +4,9 @@ import {
   DialogBody,
   DialogContent,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from '@fluentui/react-components';
-import { useTasks } from '../contexts/TasksContext';
+import { useTasks } from '../../src/contexts/TasksContext';
 
 function ConfirmDeleteUser({ user }) {
   const { deleteUser } = useTasks();
@@ -19,7 +19,9 @@ function ConfirmDeleteUser({ user }) {
   return (
     <DialogBody>
       <DialogTitle>Delete user</DialogTitle>
-      <DialogContent>Delete this user and all of their tasks? This action cannot be undone.</DialogContent>
+      <DialogContent>
+        Delete this user and all of their tasks? This action cannot be undone.
+      </DialogContent>
       <DialogActions>
         <DialogTrigger disableButtonEnhancement>
           <Button appearance="secondary">Cancel</Button>

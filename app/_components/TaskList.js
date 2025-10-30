@@ -1,5 +1,5 @@
 import { makeStyles, shorthands, tokens } from '@fluentui/react-components';
-import { useTasks } from '../contexts/TasksContext';
+import { useTasks } from '../../src/contexts/TasksContext';
 import Task from './Task';
 
 const useStyles = makeStyles({
@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     fontWeight: tokens.fontWeightMedium,
     fontSize: tokens.fontSizeHero900,
     marginTop: 0,
-    lineHeight: 1
+    lineHeight: 1,
   },
   listContainer: {
     ...shorthands.padding(
@@ -17,13 +17,13 @@ const useStyles = makeStyles({
       tokens.spacingVerticalL,
       tokens.spacingHorizontalL
     ),
-    overflowY: 'auto'
+    overflowY: 'auto',
   },
   list: {
     listStyleType: 'none',
     margin: 0,
-    padding: 0
-  }
+    padding: 0,
+  },
 });
 
 function TaskList({ variant }) {
@@ -31,14 +31,22 @@ function TaskList({ variant }) {
   const classes = useStyles();
   let tasks;
   if (variant === 'incomplete')
-    tasks = users.find((user) => user.id === currentUser.id).tasks?.filter((task) => !task.done);
+    tasks = users
+      .find((user) => user.id === currentUser.id)
+      .tasks?.filter((task) => !task.done);
   if (variant === 'complete')
-    tasks = users.find((user) => user.id === currentUser.id).tasks?.filter((task) => task.done);
+    tasks = users
+      .find((user) => user.id === currentUser.id)
+      .tasks?.filter((task) => task.done);
   return (
     <div className={classes.listContainer}>
-      <h2 className={classes.title}>{variant === 'incomplete' ? 'To Do' : 'Done'}</h2>
+      <h2 className={classes.title}>
+        {variant === 'incomplete' ? 'To Do' : 'Done'}
+      </h2>
       <ul className={classes.list}>
-        {tasks?.length > 0 ? tasks.map((task) => <Task task={task} key={task.id} />) : ''}
+        {tasks?.length > 0
+          ? tasks.map((task) => <Task task={task} key={task.id} />)
+          : ''}
       </ul>
     </div>
   );
